@@ -1,0 +1,30 @@
+[
+  {
+    "task_goal": "compile libft",
+    "cognitive_type": "底层系统开发",
+    "cycle_name": "自定义 90/5",
+    "cycle_work": 90,
+    "cycle_rest": 5
+  },
+  {
+    "task_goal": "写ft——itoa",
+    "cognitive_type": "底层系统开发",
+    "cycle_name": "标准超日节律 90/5",
+    "cycle_work": 90,
+    "cycle_rest": 5
+  },
+  {
+    "task_goal": "写lstmap",
+    "cognitive_type": "底层系统开发",
+    "cycle_name": "自定义 25/5",
+    "cycle_work": 25,
+    "cycle_rest": 5
+  },
+  {
+    "task_goal": "依旧是写libft",
+    "cognitive_type": "底层系统开发",
+    "cycle_name": "平衡型",
+    "cycle_work": 45,
+    "cycle_rest": 15
+  }
+]

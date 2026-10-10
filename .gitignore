@@ -1,0 +1,12 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+
+# 日志目录保留目录结构但忽略实际日志文件
+logs/*.jsonl
+logs/*.html
+
+# 不忽略占位文件
+!logs/.gitkeep

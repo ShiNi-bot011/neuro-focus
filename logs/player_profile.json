@@ -1,0 +1,18 @@
+{
+  "total_xp": 6,
+  "level": 1,
+  "level_title": "初学者专注者",
+  "streak_days": 0,
+  "longest_streak": 0,
+  "milestones_unlocked": [],
+  "total_focus_hours": 0.0,
+  "total_tasks_done": 0,
+  "personal_records": {
+    "pr_longest_flow_min": 0.0,
+    "pr_session_focus_rate": 0.0,
+    "pr_daily_focus_min": 0.0,
+    "pr_session_xp": 6,
+    "pr_task_completion_speed": {},
+    "pr_streak_days": 0
+  }
+}
