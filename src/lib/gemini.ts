@@ -1,14 +1,18 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { AttentionSnapshot, MentalState } from '../types';
 
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
+export function getApiKey(): string {
+  return localStorage.getItem('neuro_gemini_api_key') || import.meta.env.VITE_GEMINI_API_KEY || '';
+}
 
-let genAI: GoogleGenerativeAI | null = null;
-if (API_KEY) {
+export function getGenAI(): GoogleGenerativeAI | null {
+  const key = getApiKey();
+  if (!key) return null;
   try {
-    genAI = new GoogleGenerativeAI(API_KEY);
+    return new GoogleGenerativeAI(key);
   } catch (e) {
     console.warn('Failed to initialize Google Generative AI:', e);
+    return null;
   }
 }
 
@@ -17,8 +21,9 @@ if (API_KEY) {
  */
 export async function analyzeAttentionFrame(base64Image: string): Promise<AttentionSnapshot> {
   const timestamp = Date.now();
+  const genAI = getGenAI();
 
-  if (genAI && API_KEY) {
+  if (genAI) {
     try {
       const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
       const prompt = `Analyze this user's webcam frame during a high-stakes focus session.
@@ -105,8 +110,9 @@ export async function generateVisionBoardItem(goalText: string, category: string
   motivationalQuote: string;
 }> {
   let quote = `Dedication unlocks the neural pathway to ${goalText}. Every focused minute compounds into mastery.`;
+  const genAI = getGenAI();
 
-  if (genAI && API_KEY) {
+  if (genAI) {
     try {
       const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
       const prompt = `For the personal aspiration: "${goalText}" (Category: ${category}), write:

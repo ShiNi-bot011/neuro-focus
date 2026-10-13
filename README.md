@@ -1,118 +1,133 @@
-# 神经认知专注引擎 🧠
+# 🧠 Neuro Focus Engine (前额叶认知专注引擎)
 
-> **前额叶皮层外挂** — 超短周期屏幕视差采样 × 多模态大模型意图推理 × 脑科学节律控制
+> **Prefrontal Cortex Flow Accelerator** — Real-time Camera Vision Attention Tracking × Gemini AI Multi-Snapshot Timeline Analysis × AI Kua Kua Praise Engine × Interactive Radial Skill Tree.
 
-## 脑科学原理
+[![Live Web App](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-8b5cf6?style=for-the-badge&logo=github)](https://shini-bot011.github.io/neuro-focus/)
+[![GitHub Repo](https://img.shields.io/badge/Repository-ShiNi--bot011%2Fneuro--focus-06b6d4?style=for-the-badge&logo=github)](https://github.com/ShiNi-bot011/neuro-focus)
 
-| 机制 | 说明 |
-|------|------|
-| **超日节律 Ultradian Rhythm** | 单次高强度 PFC 负荷上限 90min，强制匹配 5min 神经复位 |
-| **注意力残留阻断** | 任务切换哪怕 5 秒，重建工作记忆需 15~20min；分心初现即施加摩擦力 |
-| **多巴胺回路保护** | 攻坚痛点时，严禁娱乐/无脑闲聊作为逃避代偿 |
-| **NSDR 副交感充能** | 休息必须是真正视觉与认知卸载（远眺/闭眼/放空），严禁刷信息流 |
+---
 
-## 安装
+## 🌐 Live Web Access (随时随地在线访问)
 
+You can run and access Neuro Focus Engine directly on any computer, tablet, or phone without installing anything:
+
+👉 **[https://shini-bot011.github.io/neuro-focus/](https://shini-bot011.github.io/neuro-focus/)**
+
+---
+
+## ✨ Core Features (核心功能)
+
+### 1. 💬 AI Kua Kua Praise Engine (夸夸大仙专属赞美)
+- **Multi-Snapshot Vision Replay**: Captures optical keyframes throughout your session. At completion, Gemini analyzes all snapshots to reconstruct a minute-by-minute timeline of what you were actually doing.
+- **Personalized High-Energy Hype**:
+  - Warm, electrifying praise quotes in both **Chinese** and **English** tailored to your actual intellectual breakthroughs (e.g. C pointer boundaries, memory allocation, debugging tenacity).
+  - **Visual Timeline Milestones** (*Min 5: Initial setup locked in*, *Min 18: High cognition state*, etc.).
+  - Erupts with celebratory **confetti animation** upon session completion.
+  - Automatically awards skill XP pills (**+40 XP Hard Skill**, **+35 XP Soft Skill**) into your Skill Tree.
+  - **Daily Champion Mode**: Unlocks an exclusive trophy celebration when hitting 100% of your 3-hour daily goal!
+
+### 2. 🌲 Prefrontal Radial Skill Tree (放射状蛛网技能树)
+- **Interactive SVG Constellation**: Radiates outward from your central **PFC CORE**:
+  - 💻 **Systems & Computing**: C & Pointer Mechanics, Memory Allocation, Data Structures & Algo
+  - 🏗️ **Software Architecture**: Frontend & Reactive UI, State & Concurrency
+  - 📐 **Analytical Logic**: Root Cause Debugging, Performance Optimization
+  - 🧘 **Cognitive Stamina (Soft Skill)**: Deep Focus Endurance, Distraction Immunity, Instant Flow
+  - 🏔️ **Mental Fortitude (Soft Skill)**: Metacognitive Grit, Rest & Restoration IQ
+- **Level Progression & Unlocks**: Nodes level up with XP and progressively unlock child nodes.
+- **Hover & Inspect**: Hover over any node to view level, XP bar, and unlock criteria.
+- **Accessible Anywhere**: Embedded as a tab in the Session Evaluation modal, and as a full explorer in the Gamification tab.
+
+### 3. 📷 Optical Attention Sensor (摄像头注意力监测)
+- In-browser optical analysis detecting **Deep Flow**, **Focused**, **Distracted**, and **Away** states.
+- Auditory micro-interventions for persistent distractions without being intrusive.
+
+### 4. ⏱️ Dual Focus Engine & Restorative Breaks
+- **Interval Mode** (custom duration 15–90 min) & **Flow Mode** (unlimited stopwatch).
+- Dedicated break selector with science-backed categories:
+  - 🚽 Bathroom / Toilet Break
+  - ☕ Electrolytes & Snack
+  - 👁️ NSDR & Eye Rest (20-20-20 rule)
+  - 🧘 Physical Mobility & Stretch
+  - ⚡ Custom Rest
+
+### 5. 📅 Year-Round Heatmap Calendar & Analytics
+- GitHub-style contribution calendar tracking daily minutes focused, quality score, and session counts.
+
+### 6. 🖼️ Vision Board & Dopamine Affirmation Generator
+- Create visual dream cards with AI-curated affirmations and wallpapers for Career, Mindset, and Health.
+
+### 7. ☁️ Multi-Device Cloud Sync
+- Sync across devices using Firebase Authentication or the built-in zero-config persistent storage.
+
+---
+
+## 🚀 Quick Start (本地开发与运行)
+
+### Prerequisites
+- Node.js 18+ and npm
+- (Optional) Python 3.10+ for the desktop telemetry daemon
+
+### 1. Clone & Install
 ```bash
-# 1. 克隆项目
-git clone <repo> && cd neuro-focus-engine
+git clone https://github.com/ShiNi-bot011/neuro-focus.git
+cd neuro-focus
+npm install
+```
 
-# 2. 安装依赖
-pip install -r requirements.txt
-
-# 3. 配置 API Key
+### 2. Configure Environment (Optional)
+```bash
 cp .env.example .env
-# 编辑 .env，填入你的 Gemini API Key
-# 获取地址: https://aistudio.google.com/app/apikey
 ```
+Add your [Gemini API Key](https://aistudio.google.com/app/apikey) if you want remote AI generation (the app includes intelligent heuristic fallbacks that work 100% offline).
 
-## 使用
-
+### 3. Start the Web App
 ```bash
-# 启动专注会话
-python main.py
+npm run dev
+```
+Open **[http://localhost:3000](http://localhost:3000)** (or `http://127.0.0.1:3000`) in your browser.
 
-# 生成复盘报告（会话结束后）
-python report_generator.py
-
-# 报告选项
-python report_generator.py --no-ai          # 跳过 AI 叙事，只看统计图表
-python report_generator.py --file path.jsonl  # 指定日志文件
+### 4. Build for Production
+```bash
+npm run build
 ```
 
-## 会话流程
+---
+
+## 🛠️ Architecture & Tech Stack
 
 ```
-启动
- ↓
-输入任务目标 + 认知类型
- ↓
-描述当前状态 → Gemini AI 推荐最优专注周期
- ↓
-确认启动
- ↓
-每 30 秒: 截图 → Gemini 视觉分析 → 更新看板
- ↓
-违规干预:
-  L0 (单次)      → 静默记录
-  L1 (连续2次)   → 系统通知 + 蜂鸣
-  L2 (连续3次)   → 全屏深呼吸遮罩 5 秒
-  脑雾 (连续3次) → TTS 语音 + 全屏遮罩 10 秒
- ↓
-90 分钟 → 强制 5 分钟休息
- ↓
-Ctrl+C → 会话结束，查看统计摘要
- ↓
-python report_generator.py → 生成 HTML 复盘报告
+Frontend (React 18 + TypeScript + Vite)
+  ├── components/
+  │   ├── KuaKua/              # Fullscreen Confetti Hype Modal
+  │   ├── SkillTree/           # Radial SVG Spider Graph & Constellation
+  │   ├── Camera/              # Webcam Optical Attention Sensor
+  │   ├── Timer/               # Dual-Mode Flow & Interval Timer
+  │   ├── Evaluation/          # Session Neural Score & AI Feedback Modal
+  │   ├── Calendar/            # Year-round Contribution Heatmap
+  │   ├── VisionBoard/         # Aspirational Goal Visualizer
+  │   └── Gamification/        # Level, Badges & Skill Tree Explorer
+  ├── hooks/
+  │   ├── useSkillTree.ts      # XP Allocation & Progressive Unlock Logic
+  │   ├── useCamera.ts         # Frame Capture & Snapshot History
+  │   ├── useTimer.ts          # Tick Engine & Break State Machine
+  │   └── useGamification.ts   # Tier Ranks & Achievements
+  └── lib/
+      ├── kuakua.ts            # Multi-Snapshot Vision Timeline & Praise Generator
+      ├── gemini.ts            # Google Gemini 1.5 Flash Vision Client
+      ├── firebase.ts          # Cross-Device Cloud Store & Offline Cache
+      └── audio.ts             # Web Audio API Synthesizer Alerts
 ```
 
-## 干预等级
+---
 
-| 等级 | 触发条件 | 行为 |
-|------|---------|------|
-| **L0** | 单次偏离目标 (< 30s) | 静默记录，不打扰 |
-| **L1** | 连续 2 次偏离 (≥ 60s) | 蜂鸣音 + macOS 系统通知 |
-| **L2** | 连续 3 次违规 | 全屏深呼吸动画遮罩，5 秒强制复位 |
-| **脑雾** | 连续 3 次 fatigue ≥ 8 或 Brain_Fog | TTS 语音警报 + 10 秒遮罩 |
+## 🔒 Privacy First
 
-## Gemini 分析字段
+- **Camera frames never leave your computer unless sent directly to your configured Gemini API key for analysis.**
+- No raw images are permanently stored on servers.
+- All session logs, goals, and skill tree levels are cached locally and synced securely to your personal account.
 
-| 字段 | 说明 |
-|------|------|
-| `is_aligned` | 是否对齐任务目标 |
-| `app_or_site` | 当前前台应用/网页 |
-| `current_progress` | 具体推进内容 |
-| `activity_detail` | 细粒度行为（20字内）|
-| `mental_state` | Deep_Flow / Active_Struggle / Passive_Escapism / Brain_Fog |
-| `fatigue_score` | 1-10 疲劳程度 |
-| `intervention_required` | 是否需要立刻干预 |
+---
 
-## 隐私声明
+## 📄 License
 
-- 截图**仅存在于 RAM** (`io.BytesIO`)，绝不写入磁盘
-- 日志只记录**文字标签**，不保存任何像素数据
-- API Key 通过 `.env` 文件加载，绝不硬编码
-
-## 目录结构
-
-```
-neuro-focus-engine/
-├── main.py                # CLI 主入口
-├── report_generator.py    # 复盘报告生成器
-├── requirements.txt
-├── .env.example
-├── engine/
-│   ├── screen.py          # 截屏 + 内存压缩（隐私优先）
-│   ├── analyzer.py        # Gemini 认知分析引擎
-│   ├── intervention.py    # 阶梯干预流水线
-│   ├── state_machine.py   # 90/5 周期状态机
-│   └── overlay.py         # 全屏深呼吸遮罩（子进程）
-└── logs/
-    └── cognitive_telemetry.jsonl  # 本地日志（git ignored）
-```
-
-## 系统要求
-
-- macOS（通知与 TTS 使用 osascript / say）
-- Python 3.10+
-- Gemini API Key（免费额度通常足够日常使用）
+MIT © [ShiNi-bot011](https://github.com/ShiNi-bot011)

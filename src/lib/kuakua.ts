@@ -1,16 +1,5 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { getGenAI } from './gemini';
 import { KuaKuaData } from '../types/skills';
-
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
-
-let genAI: GoogleGenerativeAI | null = null;
-if (API_KEY) {
-  try {
-    genAI = new GoogleGenerativeAI(API_KEY);
-  } catch (e) {
-    console.warn('Failed to initialize Google Generative AI in kuakua:', e);
-  }
-}
 
 export interface KuaKuaAnalysisInput {
   snapshots: { timestamp: number; base64: string }[];
@@ -27,8 +16,9 @@ export interface KuaKuaAnalysisInput {
  */
 export async function analyzeSessionForKuaKua(input: KuaKuaAnalysisInput): Promise<KuaKuaData> {
   const { snapshots, taskGoal, focusMinutes, qualityScore, breakCount, isDailyGoalChampion } = input;
+  const genAI = getGenAI();
 
-  if (genAI && API_KEY) {
+  if (genAI) {
     try {
       const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
