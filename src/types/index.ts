@@ -21,6 +21,9 @@ export interface SessionEvaluation {
   suggestions: string[];
 }
 
+import { KuaKuaData } from './skills';
+export * from './skills';
+
 export interface FocusSession {
   id: string;
   userId: string;
@@ -35,6 +38,7 @@ export interface FocusSession {
   evaluation: SessionEvaluation;
   taskGoal: string;
   date: string; // YYYY-MM-DD
+  kuaKua?: KuaKuaData;
 }
 
 export interface UserProfile {

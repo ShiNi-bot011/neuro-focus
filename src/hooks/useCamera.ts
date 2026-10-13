@@ -68,11 +68,23 @@ export function useCamera(isSessionActive: boolean) {
     return canvas.toDataURL('image/jpeg', 0.7);
   }, [cameraActive]);
 
+  const [capturedFrames, setCapturedFrames] = useState<{ timestamp: number; base64: string }[]>([]);
+
   // Perform AI Evaluation
   const evaluateNow = useCallback(async () => {
     if (isAnalyzing) return;
     const frame = captureFrameBase64();
     if (!frame) return;
+
+    const now = Date.now();
+    setCapturedFrames(prev => {
+      // keep up to 25 keyframes across the session
+      const updated = [...prev, { timestamp: now, base64: frame }];
+      if (updated.length > 25) {
+        return updated.slice(updated.length - 25);
+      }
+      return updated;
+    });
 
     setIsAnalyzing(true);
     try {
@@ -124,6 +136,7 @@ export function useCamera(isSessionActive: boolean) {
 
   const clearSessionSnapshots = () => {
     setSnapshotsHistory([]);
+    setCapturedFrames([]);
     setLastSnapshot(null);
     consecutiveDistractionsRef.current = 0;
   };
@@ -136,6 +149,7 @@ export function useCamera(isSessionActive: boolean) {
     stopCamera,
     lastSnapshot,
     snapshotsHistory,
+    capturedFrames,
     isAnalyzing,
     evaluateNow,
     clearSessionSnapshots

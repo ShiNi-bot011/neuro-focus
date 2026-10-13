@@ -1,16 +1,21 @@
 import React from 'react';
 import { Award, Flame, Target, Zap, Shield, Sparkles, CheckCircle2, Lock } from 'lucide-react';
-import { UserProfile, Badge } from '../../types';
+import { UserProfile, Badge, SkillNode } from '../../types';
 import { ALL_BADGES, LEVEL_RANKS, getRankForLevel, getNextLevelXp } from '../../hooks/useGamification';
+import { SkillTreeGraph } from '../SkillTree/SkillTreeGraph';
 
 interface GamificationPanelProps {
   profile: UserProfile | null;
   todayMinutes: number;
+  skillNodes?: Record<string, SkillNode>;
+  totalSkillXp?: number;
 }
 
 export const GamificationPanel: React.FC<GamificationPanelProps> = ({
   profile,
-  todayMinutes
+  todayMinutes,
+  skillNodes,
+  totalSkillXp
 }) => {
   const level = profile?.level || 1;
   const xp = profile?.xp || 0;
@@ -181,6 +186,19 @@ export const GamificationPanel: React.FC<GamificationPanelProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Radial Skill Constellation Explorer */}
+      {skillNodes && (
+        <div className="glass-panel" style={{ padding: '24px' }}>
+          <div style={{ marginBottom: '16px' }}>
+            <h3 style={{ fontSize: '1.25rem', color: '#ffffff' }}>Prefrontal Radial Skill Tree</h3>
+            <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '2px' }}>
+              Your cognitive constellation expands with every focused hour. Hover over nodes to inspect levels, XP progress, and unlock pathways.
+            </p>
+          </div>
+          <SkillTreeGraph nodes={skillNodes} totalSkillXp={totalSkillXp || 0} />
+        </div>
+      )}
 
       {/* Badges Gallery */}
       <div className="glass-panel" style={{ padding: '24px' }}>

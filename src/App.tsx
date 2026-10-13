@@ -9,19 +9,26 @@ import { SessionSummaryModal } from './components/Evaluation/SessionSummaryModal
 import { FocusHeatmap } from './components/Calendar/FocusHeatmap';
 import { VisionBoardView } from './components/VisionBoard/VisionBoardView';
 import { GamificationPanel } from './components/Gamification/GamificationPanel';
+import { KuaKuaModal } from './components/KuaKua/KuaKuaModal';
 
 import { useAuth } from './hooks/useAuth';
 import { useTimer } from './hooks/useTimer';
 import { useCamera } from './hooks/useCamera';
+import { useSkillTree } from './hooks/useSkillTree';
 import { calculateNewStats } from './hooks/useGamification';
 import { getUserSessions, saveSession, getUserGoals, saveGoal } from './lib/firebase';
-import { FocusSession, GoalItem, Badge, SessionEvaluation } from './types';
+import { analyzeSessionForKuaKua } from './lib/kuakua';
+import { FocusSession, GoalItem, Badge, SessionEvaluation, KuaKuaData } from './types';
 
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'timer' | 'calendar' | 'vision' | 'gamification'>('timer');
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [breakModalOpen, setBreakModalOpen] = useState(false);
   
+  // Kua Kua modal state
+  const [kuaKuaData, setKuaKuaData] = useState<KuaKuaData | null>(null);
+  const [kuaKuaModalOpen, setKuaKuaModalOpen] = useState(false);
+
   // Completed session evaluation modal state
   const [summarySession, setSummarySession] = useState<FocusSession | null>(null);
   const [newBadges, setNewBadges] = useState<Badge[]>([]);
@@ -35,6 +42,9 @@ export const App: React.FC = () => {
 
   // Camera Hook
   const camera = useCamera(timer.status === 'focusing');
+
+  // Skill Tree Hook
+  const skillTree = useSkillTree(currentUser?.uid);
 
   // Sessions and Goals state
   const [sessions, setSessions] = useState<FocusSession[]>([]);
@@ -234,13 +244,40 @@ export const App: React.FC = () => {
     await saveSession(newSession);
     setSessions(prev => [newSession, ...prev]);
 
+    // Analyze session with Gemini Vision snapshots for Kua Kua & Skill Classification
+    const dailyGoal = profile?.dailyGoalMinutes || 180;
+    const isDailyGoalChampion = (todayMinutes + focusMinutes) >= dailyGoal;
+
+    try {
+      const kuaKuaResult = await analyzeSessionForKuaKua({
+        snapshots: camera.capturedFrames,
+        taskGoal: timer.taskGoal,
+        focusMinutes,
+        qualityScore: score,
+        breakCount: timer.currentBreaks.length,
+        isDailyGoalChampion
+      });
+
+      // Allocate skill XP to the Radial Skill Tree
+      skillTree.addSessionSkills(
+        kuaKuaResult.hardSkillsGained,
+        kuaKuaResult.softSkillsGained
+      );
+
+      newSession.kuaKua = kuaKuaResult;
+      setKuaKuaData(kuaKuaResult);
+      setKuaKuaModalOpen(true);
+    } catch (kuaErr) {
+      console.warn('Kua Kua analysis error:', kuaErr);
+    }
+
     // Show summary modal
     setSummarySession(newSession);
 
     // Reset timer & camera state
     timer.resetTimer();
     camera.clearSessionSnapshots();
-  }, [timer, camera, currentUser, profile, updateProfile]);
+  }, [timer, camera, currentUser, profile, updateProfile, todayMinutes, skillTree]);
 
   // Goal actions
   const handleAddGoal = async (newGoal: GoalItem) => {
@@ -368,6 +405,8 @@ export const App: React.FC = () => {
           <GamificationPanel
             profile={profile}
             todayMinutes={todayMinutes}
+            skillNodes={skillTree.skillNodes}
+            totalSkillXp={skillTree.totalSkillXp}
           />
         )}
       </main>
@@ -392,7 +431,21 @@ export const App: React.FC = () => {
         session={summarySession}
         newBadges={newBadges}
         xpEarned={recentXp}
+        skillNodes={skillTree.skillNodes}
+        totalSkillXp={skillTree.totalSkillXp}
+        onOpenKuaKua={() => setKuaKuaModalOpen(true)}
         onClose={() => setSummarySession(null)}
+      />
+
+      {/* Kua Kua Fullscreen Dopamine Praise Modal */}
+      <KuaKuaModal
+        isOpen={kuaKuaModalOpen}
+        data={kuaKuaData}
+        onClose={() => setKuaKuaModalOpen(false)}
+        onOpenSkillTree={() => {
+          setKuaKuaModalOpen(false);
+          setActiveTab('gamification');
+        }}
       />
     </div>
   );
