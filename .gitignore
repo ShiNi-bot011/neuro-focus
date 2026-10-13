@@ -10,3 +10,7 @@ logs/*.html
 
 # 不忽略占位文件
 !logs/.gitkeep
+
+# Node / Vite
+node_modules/
+dist/
